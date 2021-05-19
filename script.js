@@ -1,14 +1,14 @@
 let curr = new Date;
 let firstDay = new Date(curr.setDate(curr.getDate() - curr.getDay()+1))
-               .toLocaleDateString();
+               .toLocaleDateString("en-GB");
 let secondDay = new Date(curr.setDate(curr.getDate() - curr.getDay()+2))
-                .toLocaleDateString();
+                .toLocaleDateString("en-GB");
 let thirdDay = new Date(curr.setDate(curr.getDate() - curr.getDay()+3))
-              .toLocaleDateString();
+              .toLocaleDateString("en-GB");
 let fourthDay = new Date(curr.setDate(curr.getDate() - curr.getDay())+4)
-                .toLocaleDateString();
+                .toLocaleDateString("en-GB");
 let fifthDay = new Date(curr.setDate(curr.getDate() - curr.getDay()+5))
-               .toLocaleDateString();
+               .toLocaleDateString("en-GB");
 
 
 
@@ -19,7 +19,7 @@ const dayTime = {
   };
 
 
-let day, times, timesRow;
+let day, times, timesRow, slot;
 
 let table = document.getElementById("schedule");
 
@@ -37,39 +37,48 @@ const renderCalender = () =>
   }
 
   for(let j = 0; j < dayTime.times.length; j++ )
-    { let mondayCell = document.createElement('td') ;
-      mondayCell.className += "Monday"; 
+    { 
+      let mondayCell = document.createElement('td');
       mondayCell.addEventListener("click", addEvent);
-      
-      mondayCell.id =  `Monday`;
+      mondayCell.id =`M_${dayTime.times[j]}`;
 
-      let emptyCell2 = document.createElement('td') ;
-      emptyCell2.className += "Tuesday"; 
-      emptyCell2.addEventListener("click", addEvent);
-      emptyCell2.id =  `Tuesday`;
+      let tuesdayCell = document.createElement('td');
+      tuesdayCell.addEventListener("click", addEvent);
+      tuesdayCell.id =`Tu_${dayTime.times[j]}`;
 
-      let emptyCell3 = document.createElement('td') ;
-      let emptyCell4 = document.createElement('td') ;
-      let emptyCell5 = document.createElement('td') ;
+      let wednesdayCell = document.createElement('td');
+      wednesdayCell.addEventListener("click", addEvent);
+      wednesdayCell.id =`W_${dayTime.times[j]}`;
+
+
+      let thursdayCell = document.createElement('td');
+      thursdayCell.addEventListener("click", addEvent);
+      thursdayCell.id =`Th_${dayTime.times[j]}`;
+
+
+      let fridayCell = document.createElement('td');
+      fridayCell.addEventListener("click", addEvent);
+      fridayCell.id =`Fr_${dayTime.times[j]}`;
 
       timesRow = document.createElement('tr');
       time = document.createElement('td');  
       time.innerHTML = dayTime.times[j];    
-      timesRow.append(time, mondayCell, emptyCell2,emptyCell3, emptyCell4,emptyCell5);
+      timesRow.append(time, mondayCell, tuesdayCell,wednesdayCell, thursdayCell,fridayCell);
       table.appendChild(timesRow);
     }
 }
 
 
-
-const addEvent = () => {
-   var event = prompt("Please enter an event for this time", "Reading");
-    if (event != null) {
-     console.log(`You wan't to do ${event} at this time`)
+const addEvent = (event) => {
+ 
+  let theId = event.target.id;
+   slot = document.getElementById(theId);
+   let activity = prompt("Please enter an event for this time", "Reading");
+    if (event != null) 
+    {
+      slot.innerHTML = activity
       
-    }
+    }    
 }
-
-// document.getElementsByTagName("td").addEventListener("click", addEvent);
 
 renderCalender();
