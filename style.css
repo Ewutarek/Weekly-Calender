@@ -1,0 +1,12 @@
+body{
+  font-family: 'Courier New', monospace;
+}
+
+.content {
+  max-width: 500px;
+  margin: auto;
+}
+
+th, td {
+  border-bottom: 1px solid #ddd;
+}
