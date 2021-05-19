@@ -10,3 +10,9 @@ body{
 th, td {
   border-bottom: 1px solid #ddd;
 }
+
+td,th {
+  border-right: 1px solid #ddd;
+}
+
+td:hover {background-color: #ff9797;}
