@@ -15,4 +15,14 @@ td,th {
   border-right: 1px solid #ddd;
 }
 
-td:hover {background-color: #ff9797;}
+td:hover {
+  background-color: #89a199;
+}
+
+form{
+   text-align: center;
+}
+
+#help-text{
+   text-align: center;
+}

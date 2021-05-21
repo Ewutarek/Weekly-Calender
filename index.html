@@ -4,20 +4,41 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <title>repl.it</title>
-    <link href="style.css" rel="stylesheet" type="text/css" />
+    <link href="style.css" rel="stylesheet" type="text/css" />  
   </head>
   <body>
      <div class="content">
-     <h1> Daily Schedule </h1> 
-     <table id ="schedule" style="width:100%">   
-       <tr id ="weekdays">
-         <th></th>
-         <!-- Javascript adds days here -->
-       </tr>
-     </table>
-     
+      <h1> Daily Schedule </h1> 
+      <table id ="schedule" style="width:100%">   
+        <tr id ="weekdays">
+          <th></th>
+          <!-- Javascript adds days here -->
+        </tr>
+      </table>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    
+  <form id="eventForm" onsubmit="submitEvent(event)">
+    <label for="event">Event:</label><br>
+    <input type="text" id="event" name="event"><br>
+    <label for="priority">Choose the event priority:</label><br>
+    <select id="priority" name="priority" id="priority">
+      <option value="high">High</option>
+      <option value="medium">Medium</option>
+      <option value="low">Low</option>
+    </select>
+    <button onclick=submitEvent()>Submit</button>
+ </form><br>
+
+ <p id="help-text">
+  1. Enter your event <br>
+  2. Select the priority<br>
+  3. Click submit<br>
+  4. Select desired time slot<br>
+
+  </p>
+   
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="script.js"></script>
   </body>
 </html>

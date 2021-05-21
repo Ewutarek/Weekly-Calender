@@ -1,30 +1,39 @@
 let curr = new Date;
-let firstDay = new Date(curr.setDate(curr.getDate() - curr.getDay()+1))
+let monday = new Date(curr.setDate(curr.getDate() - curr.getDay()+1))
                .toLocaleDateString("en-GB");
-let secondDay = new Date(curr.setDate(curr.getDate() - curr.getDay()+2))
+let tuesday = new Date(curr.setDate(curr.getDate() - curr.getDay()+2))
                 .toLocaleDateString("en-GB");
-let thirdDay = new Date(curr.setDate(curr.getDate() - curr.getDay()+3))
+let wednesday = new Date(curr.setDate(curr.getDate() - curr.getDay()+3))
               .toLocaleDateString("en-GB");
-let fourthDay = new Date(curr.setDate(curr.getDate() - curr.getDay())+4)
+let thursday = new Date(curr.setDate(curr.getDate() - curr.getDay()+4))
                 .toLocaleDateString("en-GB");
-let fifthDay = new Date(curr.setDate(curr.getDate() - curr.getDay()+5))
+let friday = new Date(curr.setDate(curr.getDate() - curr.getDay()+5))
                .toLocaleDateString("en-GB");
+
+monday = `Monday:<br>${monday}`;
+tuesday = `Tuesday:<br>${tuesday}`
+wednesday = `Wednesday:<br>${wednesday}`
+thursday = `Thursday:<br>${thursday}`
+friday = `Friday:<br>${friday}`
 
 
 
 const dayTime = {
-      weekdays: [firstDay, secondDay, thirdDay,fourthDay,fifthDay,],
+      weekdays: [monday, tuesday, wednesday,thursday,friday,],
       times: ['09:00','10:00', '11:00', '12:00', '13:00', '14:00','15:00','16:00','17:00'],
       
   };
 
 
-let day, times, timesRow, slot;
+let day, times, timesRow, slot, activity, priority;
 
 let table = document.getElementById("schedule");
 
-let weekdays = document.getElementById("weekdays")
+let weekdays = document.getElementById("weekdays");
 
+let eventForm = document.getElementById("eventForm");
+
+let msg = document.getElementById("help-text");
 
 
 const renderCalender = () =>
@@ -37,7 +46,7 @@ const renderCalender = () =>
   }
 
   for(let j = 0; j < dayTime.times.length; j++ )
-    { 
+  { 
       let mondayCell = document.createElement('td');
       mondayCell.addEventListener("click", addEvent);
       mondayCell.id =`M_${dayTime.times[j]}`;
@@ -65,20 +74,53 @@ const renderCalender = () =>
       time.innerHTML = dayTime.times[j];    
       timesRow.append(time, mondayCell, tuesdayCell,wednesdayCell, thursdayCell,fridayCell);
       table.appendChild(timesRow);
-    }
+  }
 }
 
+const submitEvent =(e) => {
+  
+  e.preventDefault();
+
+  //set actiivity
+  activity = document.getElementById("event").value;
+  console.log(activity);
+  //set priority
+  priority = document.getElementById("priority").value;
+  
+} 
 
 const addEvent = (event) => {
- 
-  let theId = event.target.id;
+
+   
+   let theId = event.target.id;
    slot = document.getElementById(theId);
-   let activity = prompt("Please enter an event for this time", "Reading");
-    if (event != null) 
+
+   slot.innerHTML = "";
+
+   if (activity != "" && priority == "high")
+   {
+     slot.style.backgroundColor = `#ff9797`;
+   } else if (activity != "" && priority == "medium")
+     {
+       slot.style.backgroundColor = `#fffd97`;
+     } else if (activity != "" && priority == "low")
+       {
+        slot.style.backgroundColor = `#97ffa8`;
+       } else
+         {
+           slot.style.backgroundColor = `#ffffff`
+         }
+
+    if (activity != undefined && event != null) 
     {
       slot.innerHTML = activity
       
-    }    
+    } else
+      {
+         slot.innerHTML = ""
+      }
+
+
 }
 
 renderCalender();
